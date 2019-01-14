@@ -21,6 +21,8 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+ulimit -n 10000
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -31,6 +33,14 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+{{- if eq .chezmoi.os "darwin" }}
+if command -v brew > /dev/null 2>&1 ; then
+  if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    . "$(brew --prefix)/etc/bash_completion"
+  fi
+fi
+{{- end }}
 
 # Source global definitions
 for initfile in "{{- .chezmoi.homedir -}}/.bash.aliases"\
