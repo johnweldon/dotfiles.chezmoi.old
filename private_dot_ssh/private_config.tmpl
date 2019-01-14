@@ -1,0 +1,27 @@
+#ControlMaster auto
+#ControlPath ~/.ssh/control:%h:%p:%r
+
+{{ with .ssh.config }}{{ . }}{{ end }}
+
+Host *github.com *bitbucket.org
+    ForwardAgent no
+
+
+## General
+
+Host *
+    User {{ .chezmoi.username }}
+    Protocol 2
+    ForwardAgent yes
+    StrictHostKeyChecking no
+    ServerAliveCountMax 200
+    ServerAliveInterval 10
+    TCPKeepAlive yes
+
+
+## Document sample settings
+#    LocalForward localhost:13389 windowsbox:3389
+#    ProxyCommand nc -Xconnect -x<proxyhostname>:8080 %h %p
+#    ProxyCommand ssh -p 2222 -q -W %h:%p jump-host
+#    IdentityFile ~/.ssh/other/awskey20151228.pem
+#    vi:se et ts=4 sts=4 sw=4 tw=0:
