@@ -1,0 +1,42 @@
+[ui]
+editor = vi
+ignore = ~/.local.hgignore
+merge = kdiff3
+
+[defaults]
+log = --limit 20 --template '{shortest(node)}{if(tags, " ({tags})")} - {date|isodatesec} - {author|user} {desc|strip|firstline}\n'
+
+[alias]
+brs = branches
+br = branch
+st = status 
+pu = pull -u
+pr = pull --rebase
+lf = log --limit 5 --style default
+lm = log --branch . --style compact --rev "children(ancestor(default, .))"
+lg = log --limit 40 --template '{shortest(node)}{if(tags, " ({tags})")} - {date|age} - {author|user} {desc|strip|firstline}\n'
+squash = rebase --dest "remote()" --collapse
+
+[extensions]
+color =
+mq =
+pager =
+progress =
+rebase =
+share = 
+purge = 
+extdiff =
+
+[diff]
+ignorews = True
+ignorewsamount = True
+ignoreblanklines = True
+git = True
+
+[patch]
+eol = auto
+
+[mq]
+git = auto
+
+%include ~/.local.hgrc
