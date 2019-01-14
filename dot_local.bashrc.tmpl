@@ -1,11 +1,29 @@
 #!/usr/bin/env bash
 
-{{ with .user.time_zone }}export TZ='{{- . -}}'{{ end }}
-export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
+# Time Zone. sometimes useful.
+export TZ='{{ .user.time_zone }}'
 
 {{- if eq .chezmoi.os "darwin" }}
 if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
   . "$(brew --prefix)/etc/bash_completion"
+fi
+{{- end }}
+
+{{- if eq .chezmoi.hostname "belfalas" }}
+if [ -f "{{ .chezmoi.homedir }}/.local.java" ]; then
+  source "{{ .chezmoi.homedir }}/.local.java"
+fi
+{{- end }}
+
+{{- if eq .chezmoi.hostname "belfalas" }}
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "{{ .chezmoi.homedir }}/build/google-cloud-sdk/path.bash.inc" ]; then
+  source "{{ .chezmoi.homedir }}/build/google-cloud-sdk/path.bash.inc"
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "{{ .chezmoi.homedir }}/build/google-cloud-sdk/completion.bash.inc" ]; then
+  source "{{ .chezmoi.homedir }}/build/google-cloud-sdk/completion.bash.inc"
 fi
 {{- end }}
 

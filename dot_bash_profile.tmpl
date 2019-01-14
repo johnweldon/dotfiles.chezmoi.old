@@ -52,6 +52,11 @@ if [ ! -f "{{- .chezmoi.homedir -}}/.ssh/noagent" ] ; then
   fi
 fi
 
+
+export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
+
+export GIT_CEILING_DIRECTORIES="{{ .chezmoi.homedir }}/src:{{ .chezmoi.homedir }}/build:{{ .chezmoi.homedir }}/Dropbox:{{ .chezmoi.homedir }}/Downloads"
+
 export BASH_ENV="{{- .chezmoi.homedir -}}/.bashrc"
 if [ -f $BASH_ENV ]; then
   . $BASH_ENV
