@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+export TZ='America/Phoenix'
+export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
+
+{{- if eq .chezmoi.os "darwin" }}
+if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+  . "$(brew --prefix)/etc/bash_completion"
+fi
+{{- end }}
+
+ulimit -n 10000
+

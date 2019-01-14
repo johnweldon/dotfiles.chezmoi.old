@@ -1,0 +1,19 @@
+[core]
+	autocrlf = input
+
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+	insteadOf = git://github.com/
+	insteadOf = gh:
+
+[url "git@bitbucket.org:"]
+	insteadOf = https://bitbucket.org/
+	insteadOf = git://bitbucket.org/
+	insteadOf = bb:
+
+[http]
+  cookiefile = {{ .chezmoi.homedir }}/.gitcookies
