@@ -7,8 +7,8 @@
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [user]
-	name = {{ .user.name }}
-	email = {{ .user.email }}
+  name = {{ .user.name }}
+  email = {{ .user.email }}
 
 [http]
   cookiefile = {{ .chezmoi.homedir }}/.gitcookies
@@ -35,17 +35,17 @@
   mnemonicprefix = true
 
 [url "git@github.com:"]
-	insteadOf = https://github.com/
-	insteadOf = git://github.com/
-	insteadOf = gh:
+  insteadOf = https://github.com/
+  insteadOf = git://github.com/
+  insteadOf = gh:
 
 [url "git@bitbucket.org:"]
-	insteadOf = https://bitbucket.org/
-	insteadOf = git://bitbucket.org/
-	insteadOf = bb:
+  insteadOf = https://bitbucket.org/
+  insteadOf = git://bitbucket.org/
+  insteadOf = bb:
 
 [http "https://gopkg.in"]
-	followRedirects = true
+  followRedirects = true
 
 [color]
   ui = auto
