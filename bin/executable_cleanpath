@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+import argparse
+import os
+
+
+def clean(messy, sep):
+    parts = messy.split(sep)
+    cleaned = []
+    for part in parts:
+        seg = os.path.normpath(part)
+        if not os.path.isabs(seg):
+            continue
+        if seg in cleaned:
+            continue
+        cleaned.append(seg)
+
+    return sep.join(cleaned)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Clean PATH like strings')
+    parser.add_argument('paths', metavar='<pathvar>', type=str, nargs='*', help='PATH values',
+                        default=os.getenv('PATH', ''))
+    parser.add_argument('-separator', metavar='<sep>', type=str, help='path separator char', default=':')
+    args = parser.parse_args()
+
+    paths = args.paths
+    if isinstance(args.paths, list):
+        paths = args.separator.join(args.paths)
+    print(clean(paths, args.separator))
