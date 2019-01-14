@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+    *) return ;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Source global definitions
+for initfile in "{{- .chezmoi.homedir -}}/.bash.aliases"\
+                "{{- .chezmoi.homedir -}}/.local.bashrc"
+do
+  if [ -f ${initfile} ]; then
+    . ${initfile}
+  fi
+done
+
+command set -o vi
+command set -o ignoreeof
+command set -o noclobber
+
+[ -f "{{- .chezmoi.homedir -}}/.lesskey" ] && lesskey
+
+function setprompt {
+  local escon="\[\033["
+  local escoff="\]"
+
+  local fg_black="${escon}0;30m${escoff}"
+  local fg_red="${escon}0;31m${escoff}"
+  local fg_green="${escon}0;32m${escoff}"
+  local fg_brown="${escon}0;33m${escoff}"
+  local fg_blue="${escon}0;34m${escoff}"
+  local fg_purple="${escon}0;35m${escoff}"
+  local fg_cyan="${escon}0;36m${escoff}"
+  local fg_lgray="${escon}0;37m${escoff}"
+  local fg_dgray="${escon}1;30m${escoff}"
+  local fg_lred="${escon}1;31m${escoff}"
+  local fg_lgreen="${escon}1;32m${escoff}"
+  local fg_yellow="${escon}1;33m${escoff}"
+  local fg_lblue="${escon}1;34m${escoff}"
+  local fg_lpurple="${escon}1;35m${escoff}"
+  local fg_lcyan="${escon}1;36m${escoff}"
+  local fg_lgray="${escon}1;37m${escoff}"
+
+  local bg_black="${escon}0;40m${escoff}"
+  local bg_red="${escon}0;41m${escoff}"
+  local bg_green="${escon}0;42m${escoff}"
+  local bg_brown="${escon}0;43m${escoff}"
+  local bg_blue="${escon}0;44m${escoff}"
+  local bg_purple="${escon}0;45m${escoff}"
+  local bg_cyan="${escon}0;46m${escoff}"
+  local bg_lgray="${escon}0;47m${escoff}"
+  local bg_dgray="${escon}1;40m${escoff}"
+  local bg_lred="${escon}1;41m${escoff}"
+  local bg_lgreen="${escon}1;42m${escoff}"
+  local bg_yellow="${escon}1;43m${escoff}"
+  local bg_lblue="${escon}1;44m${escoff}"
+  local bg_lpurple="${escon}1;45m${escoff}"
+  local bg_lcyan="${escon}1;46m${escoff}"
+  local bg_lgray="${escon}1;47m${escoff}"
+
+  local fg_default="${escon}0;39m${escoff}"
+  local bg_default="${escon}0;49m${escoff}"
+
+  local promptstr='$ '
+  if [ "X${UID}" == "X0" ]; then local promptstr=${fg_red}'# '${fg_default}; fi
+
+  local user=${fg_lcyan}'$CURRENT_USER{'${fg_lpurple}'$UID'${fg_lcyan}'}'${fg_default}
+  local host='@'${fg_green}'$CURRENT_HOST'${fg_default}
+  local path=' ('${fg_yellow}'\w'${fg_default}')'
+
+  local line1='\n'${user}${host}${path}${line2}
+  local line2='\n'${fg_dgray}'\t [$?]('${fg_lgreen}${SHLVL}${fg_dgray}') '${promptstr}
+
+  export PS1=${line1}${line2}${bg_default}${fg_default}
+  export PS2=${fg_red}'+ '${fg_default}
+}
+setprompt
+
+umask 002
+
+case $(realpath "$(command -v grep)") in
+  *busybox) ;;
+  *grep) alias grep="grep --exclude-dir=.git --color=auto" ;;
+  *) ;;
+esac
+
