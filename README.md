@@ -24,3 +24,5 @@ data:
           Hostname beowulf.example.com
           LocalForward 0.0.0.0:80 127.0.0.1:80
 ```
+
+You can generate it with the `generate` script.

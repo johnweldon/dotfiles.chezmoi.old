@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+export CONFIG_FILE="${HOME}/.config/chezmoi/chezmoi.yaml"
+export CONFIG_DIR="`dirname "${CONFIG_FILE}"`"
+
+if [ ! -d "${CONFIG_DIR}" ]; then
+  mkdir -p "${CONFIG_DIR}"
+fi
+
+if [ ! -f ${CONFIG_FILE} ]; then
+  cat << EOM > ${CONFIG_FILE}
+data:
+  user:
+    email: me@example.com
+    name: My Name
+    time_zone: America/Phoenix
+  ssh:
+    public: ssh-rsa xxxx
+    private: |-
+      -----BEGIN RSA PRIVATE KEY-----
+      xxxx
+      -----END RSA PRIVATE KEY-----
+    config: |-
+      Host local
+          Hostname localhost
+EOM
+else
+  echo "${CONFIG_FILE} already exists"
+fi
