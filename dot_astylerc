@@ -1,0 +1,13 @@
+--suffix=none
+--mode=c
+-A10
+--break-blocks=all
+--break-return-type
+--pad-oper
+--pad-comma
+--delete-empty-lines
+--align-pointer=middle
+--add-braces
+--convert-tabs
+--max-code-length=78
+--quiet
