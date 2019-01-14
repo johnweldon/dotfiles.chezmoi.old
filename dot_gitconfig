@@ -9,21 +9,8 @@
 [gui]
   encoding = utf-8
 
-
-
-#[url "git@github.com:"]
-  #insteadOf = https://github.com/
-  #insteadOf = git://github.com/
-
-#[url "git@bitbucket.org:"]
-  #insteadOf = https://bitbucket.org/
-  #insteadOf = git://bitbucket.org/
-
-
-
 [format]
   pretty = %C(bold red)%h%Creset %C(white)%>(8,trunc)%ar%Creset %Cgreen%<(12,trunc)%aN%Creset %C(bold normal)%<(30)%s%Creset %C(auto)%d%Creset
-
 
 [log]
   date = iso

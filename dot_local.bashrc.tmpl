@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export TZ='America/Phoenix'
+{{ with .user.time_zone }}export TZ='{{- . -}}'{{ end }}
 export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
 
 {{- if eq .chezmoi.os "darwin" }}
