@@ -5,6 +5,7 @@ export CONFIG_DIR="`dirname "${CONFIG_FILE}"`"
 
 if [ ! -d "${CONFIG_DIR}" ]; then
   mkdir -p "${CONFIG_DIR}"
+  chmod 0700 "${CONFIG_DIR}"
 fi
 
 if [ ! -f ${CONFIG_FILE} ]; then
