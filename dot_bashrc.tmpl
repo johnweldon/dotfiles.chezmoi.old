@@ -23,7 +23,7 @@ shopt -s checkwinsize
 
 {{ if eq .chezmoi.os "darwin" -}}
 ulimit -n 10000
-{{- end -}}
+{{- end }}
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
