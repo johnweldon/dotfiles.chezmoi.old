@@ -115,7 +115,7 @@ function setprompt {
 }
 setprompt
 
-umask 002
+umask 022
 
 case $(realpath "$(command -v grep)") in
   *busybox) ;;
