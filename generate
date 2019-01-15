@@ -25,6 +25,9 @@ data:
     config: |-
       Host local
           Hostname localhost
+  admin:
+    hosts:
+    - localhost
 EOM
 else
   echo "${CONFIG_FILE} already exists"

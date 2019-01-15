@@ -21,6 +21,10 @@ elseif has("x11")
 else
 endif
 
+set colorcolumn=+1
+highlight ColorColumn guibg=darkblue guifg=white
+highlight LineNr guibg=darkblue guifg=white
+highlight NonText guifg=darkblue
 
 if filereadable(findfile("~/.local.gvimrc"))
     source ~/.local.gvimrc

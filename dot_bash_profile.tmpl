@@ -60,6 +60,8 @@ export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
 
 export GIT_CEILING_DIRECTORIES="{{ .chezmoi.homedir }}/src:{{ .chezmoi.homedir }}/build:{{ .chezmoi.homedir }}/Dropbox:{{ .chezmoi.homedir }}/Downloads"
 
+export MY_SERVERS="{{ range .admin.hosts }}{{ . }} {{ end -}}"
+
 {{ if eq .chezmoi.os "linux" -}}
 if [ -d /usr/local/go/bin ]; then
   export PATH="${PATH}:/usr/local/go/bin"
