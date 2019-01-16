@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[ -f "{{ .chezmoi.homedir }}/.bash.functions" ] && . "{{ .chezmoi.homedir }}/.bash.functions"
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -122,14 +124,3 @@ case $(realpath "$(command -v grep)") in
   *grep) alias grep="grep --exclude-dir=.git --color=auto" ;;
   *) ;;
 esac
-
-function do_on_my_servers() {
-  for h in ${MY_SERVERS}; do echo -e "\n\n\tConnecting to $h\n\t----------\n"
-    ssh -t $h "$@"
-  done
-}
-
-function random_string() {
-  LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | fold -w ${1:-32} | head -n 1
-  #>
-}

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function do_on_my_servers() {
+  for h in ${MY_SERVERS:-localhost}; do echo -e "\n\n\tConnecting to $h\n\t----------\n"
+    ssh -t $h "$@"
+  done
+}
+
+function random_string() {
+  LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | fold -w ${1:-32} | head -n 1
+  #>
+}
