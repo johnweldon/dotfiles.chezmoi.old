@@ -117,8 +117,6 @@ function setprompt {
 }
 setprompt
 
-umask 022
-
 case $(realpath "$(command -v grep)") in
   *busybox) ;;
   *grep) alias grep="grep --exclude-dir=.git --color=auto" ;;

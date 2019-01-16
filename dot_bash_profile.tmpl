@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+umask 022
+
 if [ -x /usr/bin/uname ]; then UNAME=/usr/bin/uname ; fi
 if [ -x /bin/uname ]; then UNAME=/bin/uname ; fi
 
