@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+function do_each_repo() {
+  for r in $(find . -type d -name .git -exec dirname {} \;); do
+    echo -e "Entering $r\n--------\n"
+    (cd $r; git status;  git remote -v)
+    echo -e "\nAbout to: $@"
+    read -p "Proceed? " -n 1 selection
+    echo
+    case "$selection" in
+      q|Q|x|X ) return -1 ;;
+      y|Y ) (cd $r; eval "$@") ;;
+        * ) echo -e "\nskipping" ;;
+    esac
+    echo -e "\n--------"
+  done
+}
+
 function do_on_my_servers() {
   for h in ${MY_SERVERS:-localhost}; do echo -e "\n\n\tConnecting to $h\n\t----------\n"
     ssh -t $h "$@"
