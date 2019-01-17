@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+. ~/.bash.functions
+
+export MY_SERVERS="{{ range .admin.apthosts }}{{ . }} {{ end -}}"
+
+do_on_my_servers " \
+  sudo apt update; \
+  sudo apt -y dist-upgrade; \
+  sudo apt -y autoremove --purge; \
+  sudo apt -y autoclean; \
+  [ -f '/run/reboot-required' ] && \
+    echo -e '\n\n\treboot needed\n\n' || \
+    echo -e '\n\tAll Done\n' \
+  "
+{{- end -}}
