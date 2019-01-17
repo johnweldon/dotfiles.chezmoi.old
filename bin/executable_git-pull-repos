@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+. ~/.bash.functions
+
+do_each_repo git pull
+
