@@ -110,7 +110,7 @@ function setprompt {
   local path=' ('${fg_yellow}'\w'${fg_default}')'
 
   local line1='\n'${user}${host}${path}${line2}
-  local line2='\n'${fg_dgray}'\t [$?]('${fg_lgreen}${SHLVL}${fg_dgray}') '${promptstr}
+  local line2='\n'${fg_lpurple}'\t [$?]('${fg_lgreen}${SHLVL}${fg_lpurple}') '${promptstr}
 
   export PS1=${line1}${line2}${bg_default}${fg_default}
   export PS2=${fg_red}'+ '${fg_default}
