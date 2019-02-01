@@ -11,7 +11,7 @@ nmap <SID>Format :call <SID>Format()<CR>
 function! s:Format()
 	let pos = getpos('.')
 	silent update
-	silent %!html-beautify --type "html" --editorconfig -n -p -f -
+	silent %!html-beautify --type "html" --editorconfig -n -p
 	call setpos('.', pos)
 endfunction
 

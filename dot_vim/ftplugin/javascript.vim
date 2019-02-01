@@ -11,7 +11,7 @@ nmap <SID>Format :call <SID>FormatJavascript()<CR>
 function! s:FormatJavascript()
   let pos = getpos('.')
   silent update
-  silent %!js-beautify --editorconfig -j -n -p -f -
+  silent %!js-beautify --editorconfig -j -n -p
   call setpos('.', pos)
 endfunction
 
