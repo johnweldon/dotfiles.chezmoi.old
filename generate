@@ -17,17 +17,14 @@ data:
     name: My Name
     time_zone: America/Phoenix
   ssh:
-    public: ssh-rsa xxxx
-    private: |-
-      -----BEGIN RSA PRIVATE KEY-----
-      xxxx
-      -----END RSA PRIVATE KEY-----
-    config: |-
-      Host local
-          Hostname localhost
+    authorized: ''
+    public: ''
+    private: ''
+    config: ''
   admin:
-    hosts:
+    hosts: []
     - localhost
+    apthosts: []
 EOM
 else
   echo "${CONFIG_FILE} already exists"
