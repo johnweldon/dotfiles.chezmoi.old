@@ -22,7 +22,7 @@ data:
     private: ''
     config: ''
   admin:
-    hosts: []
+    hosts:
     - localhost
     apthosts: []
 EOM
