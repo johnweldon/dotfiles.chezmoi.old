@@ -1,76 +1,78 @@
 [core]
-  editor = vim
-  pager = less -F -X -E
-  autocrlf = input
-  trustctime = false
-  precomposeunicode = false
-  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	editor = vim
+	pager = less -F -X -E
+	autocrlf = input
+	trustctime = false
+	precomposeunicode = false
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [user]
-  name = {{ .user.name }}
-  email = {{ .user.email }}
+	name = {{ .user.name }}
+	email = {{ .user.email }}
 
 [http]
-  cookiefile = {{ .chezmoi.homedir }}/.gitcookies
+	cookiefile = {{ .chezmoi.homedir }}/.gitcookies
 
 [gui]
-  encoding = utf-8
+	encoding = utf-8
 
 [log]
-  date = iso
-  decorate = true
+	date = iso
+	decorate = true
 
 [apply]
-  whitespace = fix
+	whitespace = fix
 
 [help]
-  autocorrect = 1
+	autocorrect = 1
 
 [push]
-  default = simple
+	default = simple
 
 [diff]
-  renameLimit = 5000
-  renames = copy
-  mnemonicprefix = true
+	renameLimit = 5000
+	renames = copy
+	mnemonicprefix = true
 
 [url "git@github.com:"]
-  insteadOf = https://github.com/
-  insteadOf = git://github.com/
-  insteadOf = gh:
+	insteadOf = https://github.com/
+	insteadOf = git://github.com/
+	insteadOf = gh:
 
 [url "git@bitbucket.org:"]
-  insteadOf = https://bitbucket.org/
-  insteadOf = git://bitbucket.org/
-  insteadOf = bb:
+	insteadOf = https://bitbucket.org/
+	insteadOf = git://bitbucket.org/
+	insteadOf = bb:
 
 [http "https://gopkg.in"]
-  followRedirects = true
+	followRedirects = true
 
 [color]
-  ui = auto
+	ui = auto
 
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red
-  new = green
-  whitespace = red reverse
+	meta = yellow bold
+	frag = magenta bold
+	old = red
+	new = green
+	whitespace = red reverse
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 
 [format]
-  pretty = %C(bold red)%h%Creset %C(white)%>(8,trunc)%ar%Creset %Cgreen%<(12,trunc)%aN%Creset %C(bold normal)%<(30)%s%Creset %C(auto)%d%Creset 
-  ##>
+	pretty = %C(bold red)%h%Creset %C(white)%>(8,trunc)%ar%Creset %Cgreen%<(12,trunc)%aN%Creset %C(bold normal)%<(30)%s%Creset %C(auto)%d%Creset 
+	##>
 
 [include]
-  path = .git.aliases
-  path = .local.gitconfig
+	path = .git.aliases
+	path = .local.gitconfig
+
+# vi:se noexpandtab:

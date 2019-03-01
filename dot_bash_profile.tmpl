@@ -70,8 +70,6 @@ if [ -d /usr/local/go/bin ]; then
 fi
 {{- end }}
 
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
 export BASH_ENV="{{- .chezmoi.homedir -}}/.bashrc"
 if [ -f $BASH_ENV ]; then
   . $BASH_ENV

@@ -40,9 +40,12 @@ fi
 
 {{ if eq .chezmoi.os "darwin" -}}
 if command -v brew > /dev/null 2>&1 ; then
-  if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+  [[ -r "$(brew --prefix)/etc/bash_completion" ]] && \
     . "$(brew --prefix)/etc/bash_completion"
-  fi
+
+  export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
+  [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && \
+    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 fi
 {{- end }}
 
