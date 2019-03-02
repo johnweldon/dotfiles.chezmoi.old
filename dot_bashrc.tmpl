@@ -8,15 +8,7 @@ if [ -d /usr/local/go/bin ]; then
 fi
 {{- end }}
 
-export PATH="${PATH}:/usr/local/bin:/usr/local/sbin"
-
-if command -v go > /dev/null 2>&1 ; then
-  export GOPATH="${GOPATH:-$(go env GOPATH)}"
-  export CDPATH="${CDPATH:-{{- .chezmoi.homedir -}}}:${GOPATH//://src:/}/src"
-  export PATH="${PATH}:{{- .chezmoi.homedir -}}/bin:${GOPATH}/bin"
-else
-  export PATH="${PATH}:{{- .chezmoi.homedir -}}/bin"
-fi
+export PATH="${PATH}:/usr/local/bin:/usr/local/sbin:{{- .chezmoi.homedir -}}/bin:{{- .chezmoi.homedir -}}/go/bin"
 
 # If not running interactively, don't do anything
 case $- in
@@ -213,6 +205,12 @@ setprompt
 #
 # final clean up of PATH
 #
+
+if command -v go > /dev/null 2>&1 ; then
+  export GOPATH="${GOPATH:-$(go env GOPATH)}"
+  export CDPATH="${CDPATH:-{{- .chezmoi.homedir -}}}:${GOPATH//://src:/}/src"
+  export PATH="${PATH}:${GOPATH}/bin"
+fi
 
 if command -v cleanpath > /dev/null 2>&1 ; then
   [ -n "${PATH}" ] && export PATH=$(cleanpath -separator ':' "$PATH")
