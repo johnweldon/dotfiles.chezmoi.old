@@ -19,9 +19,5 @@ alias latr='ls -latr'
 # MISC Aliases
 
 alias tmux='tmux -2u'
-
 alias where='for ix in ${!DIRSTACK[@]}; do echo ${DIRSTACK[$ix]}; done'
-
 alias dps="docker ps --format '{{ printf \"%-30s %-20s %s\" .Names .Status .Ports }}'"
-
-alias did='vim +"normal Go" +"r!date" ${DID_FILE:-~/did.txt}'

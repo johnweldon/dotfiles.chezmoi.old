@@ -8,7 +8,8 @@ if [ -d /usr/local/go/bin ]; then
 fi
 {{- end }}
 
-export PATH="${PATH}:/usr/local/bin:/usr/local/sbin:{{- .chezmoi.homedir -}}/bin:{{- .chezmoi.homedir -}}/go/bin"
+
+export PATH="${PATH}:/usr/local/bin:/usr/local/sbin:{{ .chezmoi.homedir }}/bin:{{ .chezmoi.homedir }}/go/bin"
 
 # If not running interactively, don't do anything
 case $- in
@@ -48,6 +49,12 @@ else
 fi
 export VISUAL=${EDITOR}
 
+export DID_FOLDER="${HOME}/Documents/notes"
+mkdir -p ${DID_FOLDER}
+function did {
+  DID_MESSAGE="$*" vim "${DID_FILE:-${DID_FOLDER:-~}/$(date +%Y-%m-%d.did)}"
+}
+
 case $(realpath "$(command -v grep)") in
   *busybox) ;;
   *grep) alias grep="grep --exclude-dir=.git --color=auto" ;;
@@ -68,13 +75,13 @@ export CLICOLOR=TRUE
 export LSCOLORS=Gxfxbxdxcxegedabagacad
 {{- end }}
 
-if [ ! -f "{{- .chezmoi.homedir -}}/.ssh/noagent" ] ; then
-  [ -f "{{- .chezmoi.homedir -}}/.ssh/agent.pid" ] && source "{{- .chezmoi.homedir -}}/.ssh/agent.pid" 2>&1 > /dev/null
+if [ ! -f "{{ .chezmoi.homedir }}/.ssh/noagent" ] ; then
+  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" 2>&1 > /dev/null
   if [ -z ${SSH_AGENT_PID} ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
     echo "cleanup and restart ssh-agent"
-    [ -f {{- .chezmoi.homedir -}}/.ssh/agent.pid ] && rm -f "{{- .chezmoi.homedir -}}/.ssh/agent.pid"
-    ssh-agent > "{{- .chezmoi.homedir -}}/.ssh/agent.pid"
-    source "{{- .chezmoi.homedir -}}/.ssh/agent.pid"
+    [ -f{{ .chezmoi.homedir }}/.ssh/agent.pid ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    ssh-agent > "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    source "{{ .chezmoi.homedir }}/.ssh/agent.pid"
   fi
 fi
 
@@ -132,8 +139,8 @@ fi
 {{- end }}
 
 # Source global definitions
-for initfile in "{{- .chezmoi.homedir -}}/.bash.aliases"\
-                "{{- .chezmoi.homedir -}}/.local.bashrc"
+for initfile in "{{ .chezmoi.homedir }}/.bash.aliases"\
+                "{{ .chezmoi.homedir }}/.local.bashrc"
 do
   if [ -f ${initfile} ]; then
     . ${initfile}
@@ -144,7 +151,7 @@ command set -o vi
 command set -o ignoreeof
 command set -o noclobber
 
-[ -f "{{- .chezmoi.homedir -}}/.lesskey" ] && lesskey
+[ -f "{{ .chezmoi.homedir }}/.lesskey" ] && lesskey
 
 function setprompt {
   local escon="\[\033["
@@ -208,7 +215,7 @@ setprompt
 
 if command -v go > /dev/null 2>&1 ; then
   export GOPATH="${GOPATH:-$(go env GOPATH)}"
-  export CDPATH="${CDPATH:-{{- .chezmoi.homedir -}}}:${GOPATH//://src:/}/src"
+  export CDPATH="${CDPATH:-{{ .chezmoi.homedir }}}:${GOPATH//://src:/}/src"
   export PATH="${PATH}:${GOPATH}/bin"
 fi
 
