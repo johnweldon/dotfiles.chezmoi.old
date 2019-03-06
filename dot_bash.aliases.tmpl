@@ -4,13 +4,11 @@
 #
 
 # ls Aliases
-
-if [ "X${CURRENT_SYSTEM}" == "XLinux" ]; then
-    alias ls='ls -CF --color=auto'
-else
-    alias ls='ls -CF'
-fi
-
+{{ if eq .chezmoi.os "linux" -}}
+alias ls='ls -CF --color=auto'
+{{ else }}
+alias ls='ls -CF'
+{{- end }}
 alias la='ls -a'
 alias ll='ls -l'
 alias lat='ls -lat'
@@ -20,4 +18,5 @@ alias latr='ls -latr'
 
 alias tmux='tmux -2u'
 alias where='for ix in ${!DIRSTACK[@]}; do echo ${DIRSTACK[$ix]}; done'
-alias dps="docker ps --format '{{ printf \"%-30s %-20s %s\" .Names .Status .Ports }}'"
+alias dps="docker ps --format '{{`{{ printf \"%-30s %-20s %s\" .Names .Status .Ports }}`}}'"
+alias todo='vim +VimwikiIndex'
