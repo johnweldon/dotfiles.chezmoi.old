@@ -50,8 +50,8 @@ fi
 export VISUAL=${EDITOR}
 
 export DID_FOLDER="${HOME}/Documents/notes"
-mkdir -p ${DID_FOLDER}
 function did {
+  [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
   DID_MESSAGE="$*" vim "${DID_FILE:-${DID_FOLDER:-~}/$(date +%Y-%m-%d.did)}"
 }
 
