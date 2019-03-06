@@ -52,6 +52,7 @@ function did {
   DID_FOLDER="${NOTES_FOLDER}"
   [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
   DID_MESSAGE="$*" vim "$(didfile)"
+  today
 }
 
 function today {
