@@ -38,10 +38,28 @@ function pusdh() {
   eval "pushd $@"
 }
 
+function didfile {
+  [[ -z "$1" ]] && \
+    local WORKING_DATE="$(date +%Y-%m-%d)" || \
+    local WORKING_DATE="$(date -v${1} +%Y-%m-%d)"
+
+  local DID_FOLDER="${NOTES_FOLDER}"
+  [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
+  echo "${DID_FILE:-${DID_FOLDER:-~}/${WORKING_DATE}.did}"
+}
+
 function did {
   DID_FOLDER="${NOTES_FOLDER}"
   [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
-  DID_MESSAGE="$*" vim "${DID_FILE:-${DID_FOLDER:-~}/$(date +%Y-%m-%d.did)}"
+  DID_MESSAGE="$*" vim "$(didfile)"
+}
+
+function today {
+  cat $(didfile)
+}
+
+function yesterday {
+  cat $(didfile "-1d")
 }
 
 function setprompt {
