@@ -23,7 +23,7 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-let g:vimwiki_list = [{'path': expand($NOTES_FOLDER) . '/todo'}]
+let g:vimwiki_list = [{'path': expand($NOTES_FOLDER)}]
 
 set modeline
 set autoread
@@ -50,7 +50,7 @@ set tabstop=2
 
 au BufNewFile,BufRead,BufReadPost 2???-??-??.did set filetype=did
 
-colorscheme torte
+colorscheme industry
 
 if filereadable(findfile("~/.local.vimrc"))
     source ~/.local.vimrc
