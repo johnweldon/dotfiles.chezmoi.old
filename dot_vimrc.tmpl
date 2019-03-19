@@ -3,10 +3,6 @@ if has('python3')
   silent! python3 1
 endif
 
-"pathogen
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
@@ -24,6 +20,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
 let g:vimwiki_list = [{'path': expand($NOTES_FOLDER)}]
+
+set omnifunc=syntaxcomplete#Complete
 
 set modeline
 set autoread
