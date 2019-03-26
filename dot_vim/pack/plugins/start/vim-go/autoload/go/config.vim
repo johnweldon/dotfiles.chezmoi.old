@@ -241,15 +241,27 @@ function! go#config#SetTemplateAutocreate(value) abort
 endfunction
 
 function! go#config#MetalinterCommand() abort
-  return get(g:, "go_metalinter_command", "")
+  return get(g:, "go_metalinter_command", "gometalinter")
 endfunction
 
 function! go#config#MetalinterAutosaveEnabled() abort
-  return get(g:, 'go_metalinter_autosave_enabled', ['vet', 'golint'])
+  let l:default_enabled = ["vet", "golint"]
+
+  if go#config#MetalinterCommand() == "golangci-lint"
+    let l:default_enabled = ["govet", "golint"]
+  endif
+
+  return get(g:, "go_metalinter_autosave_enabled", default_enabled)
 endfunction
 
 function! go#config#MetalinterEnabled() abort
-  return get(g:, "go_metalinter_enabled", ['vet', 'golint', 'errcheck'])
+  let l:default_enabled = ["vet", "golint", "errcheck"]
+
+  if go#config#MetalinterCommand() == "golangci-lint"
+    let l:default_enabled = ["govet", "golint"]
+  endif
+
+  return get(g:, "go_metalinter_enabled", default_enabled)
 endfunction
 
 function! go#config#MetalinterDisabled() abort
@@ -449,7 +461,6 @@ endfunction
 function! go#config#EchoGoInfo() abort
   return get(g:, "go_echo_go_info", 1)
 endfunction
-
 
 " Set the default value. A value of "1" is a shortcut for this, for
 " compatibility reasons.
