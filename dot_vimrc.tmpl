@@ -6,6 +6,8 @@ endif
 filetype plugin indent on
 syntax on
 
+set omnifunc=syntaxcomplete#Complete
+
 let g:godef_split=0
 let g:godef_same_file_in_same_window=1
 
@@ -23,7 +25,9 @@ let g:vimwiki_list = [{'path': expand($NOTES_FOLDER)}]
 
 let g:dadbod_manage_dbext = 1
 
-set omnifunc=syntaxcomplete#Complete
+let g:ale_completion_enabled = 1
+let g:ale_fixers = {'python': ['yapf', 'autopep8'], '*': ['remove_trailing_lines', 'fix_whitespace']}
+
 
 set modeline
 set autoread
@@ -55,3 +59,6 @@ colorscheme industry
 if filereadable(findfile("~/.local.vimrc"))
     source ~/.local.vimrc
 endif
+
+packloadall
+silent! helptags ALL
