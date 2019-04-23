@@ -282,7 +282,7 @@ function! go#debug#Stop() abort
   silent! exe bufwinnr(bufnr('__GODEBUG_OUTPUT__')) 'wincmd c'
 
   if has('balloon_eval')
-    let &noballooneval=s:ballooneval
+    let &ballooneval=s:ballooneval
     let &balloonexpr=s:balloonexpr
   endif
 
@@ -624,11 +624,14 @@ function! go#debug#Start(is_test, ...) abort
           \ '--output', tempname(),
           \ '--headless',
           \ '--api-version', '2',
-          \ '--log', '--log-output', 'debugger,rpc',
           \ '--listen', go#config#DebugAddress(),
     \]
+    let l:debugLogOutput = go#config#DebugLogOutput()
+    if l:debugLogOutput != ''
+      let cmd += ['--log', '--log-output', l:debugLogOutput]
+    endif
 
-    let buildtags = go#config#BuildTags()
+    let l:buildtags = go#config#BuildTags()
     if buildtags isnot ''
       let l:cmd += ['--build-flags', '--tags=' . buildtags]
     endif

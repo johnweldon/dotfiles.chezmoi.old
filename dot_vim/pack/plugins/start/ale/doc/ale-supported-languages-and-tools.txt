@@ -315,6 +315,8 @@ Notes:
   * `write-good`
 * Pony
   * `ponyc`
+* PowerShell
+  * `psscriptanalyzer`
 * Prolog
   * `swipl`
 * proto
@@ -335,6 +337,7 @@ Notes:
   * `prospector`
   * `pycodestyle`
   * `pydocstyle`
+  * `pyflakes`
   * `pylama`!!
   * `pylint`!!
   * `pyls`
