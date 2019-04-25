@@ -25,7 +25,7 @@ command -v whoami >/dev/null 2>&1 && export CURRENT_USER=$(whoami)
 export LC_ALL="en_US.UTF-8" >/dev/null 2>&1
 export LANG="en_US.UTF-8"
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
 case $(realpath "$(command -v less)") in
   *busybox)
     export GIT_PAGER=
@@ -48,7 +48,7 @@ else
 fi
 export VISUAL=${EDITOR}
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
 case $(realpath "$(command -v grep)") in
   *busybox) ;;
   *grep) alias grep="grep --exclude-dir=.git --color=auto" ;;

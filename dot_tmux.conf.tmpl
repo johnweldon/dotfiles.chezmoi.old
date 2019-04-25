@@ -12,7 +12,7 @@ set -g visual-activity off
 set -g status-bg default
 set -g status-fg "colour6"
 set -ag terminal-overrides ",*:XT@"
-{{ if eq .chezmoi.os "linux" -}}
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
 setw -g window-status-activity-attr none
 setw -g window-status-bell-attr none
 {{- end }}
