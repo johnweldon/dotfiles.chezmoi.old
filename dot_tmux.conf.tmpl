@@ -12,8 +12,10 @@ set -g visual-activity off
 set -g status-bg default
 set -g status-fg "colour6"
 set -ag terminal-overrides ",*:XT@"
+{{ if eq .chezmoi.os "linux" -}}
 setw -g window-status-activity-attr none
 setw -g window-status-bell-attr none
+{{- end }}
 
 set -s escape-time 10
 set -sg repeat-time 600
