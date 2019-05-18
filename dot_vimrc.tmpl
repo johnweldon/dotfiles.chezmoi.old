@@ -56,9 +56,18 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 
+
 au BufNewFile,BufRead,BufReadPost 2???-??-??.did set filetype=did
 
 colorscheme industry
+
+highlight LineNr       cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
+highlight VertSplit    cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
+highlight ModeMsg      cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
+
+highlight StatusLine   cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
+highlight StatusLineNC cterm=underline  ctermfg=darkgrey  ctermbg=NONE
+
 
 if filereadable(findfile("~/.local.vimrc"))
     source ~/.local.vimrc
