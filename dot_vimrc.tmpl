@@ -25,7 +25,9 @@ let g:go_metalinter_command='golangci-lint'
 
 let g:go_info_mode='gopls'
 
-let g:vimwiki_list = [{'path': expand($NOTES_FOLDER)}]
+if !empty($NOTES_FOLDER)
+  let g:vimwiki_list = [{'path': expand($NOTES_FOLDER)}]
+endif
 
 let g:dadbod_manage_dbext = 1
 
@@ -59,7 +61,11 @@ set tabstop=2
 
 au BufNewFile,BufRead,BufReadPost 2???-??-??.did set filetype=did
 
-colorscheme industry
+if v:version < 800
+  colorscheme koehler
+else
+  colorscheme industry
+endif
 
 highlight LineNr       cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
 highlight VertSplit    cterm=NONE       ctermfg=darkgrey  ctermbg=NONE
@@ -73,5 +79,8 @@ if filereadable(findfile("~/.local.vimrc"))
     source ~/.local.vimrc
 endif
 
-packloadall
+if v:version >= 800
+  packloadall
+endif
+
 silent! helptags ALL
