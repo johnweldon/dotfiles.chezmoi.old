@@ -216,6 +216,7 @@ function! s:info_complete(echo, result) abort
 endfunction
 
 function! s:trim_bracket(val) abort
+  echom a:val
   let a:val.word = substitute(a:val.word, '[(){}\[\]]\+$', '', '')
   return a:val
 endfunction
@@ -240,30 +241,31 @@ function! go#complete#GocodeComplete(findstart, base) abort
   else
     let s = getline(".")[col('.') - 1]
     if s =~ '[(){}\{\}]'
-      return map(copy(s:completions[1]), 's:trim_bracket(v:val)')
+      return map(copy(s:completions), 's:trim_bracket(v:val)')
     endif
-
-    return s:completions[1]
+    return s:completions
   endif
 endfunction
 
 function! go#complete#Complete(findstart, base) abort
-  let l:state = {'done': 0, 'matches': []}
+  let l:state = {'done': 0, 'matches': [], 'start': -1}
 
-  function! s:handler(state, matches) abort dict
+  function! s:handler(state, start, matches) abort dict
+    let a:state.start = a:start
     let a:state.matches = a:matches
     let a:state.done = 1
   endfunction
 
   "findstart = 1 when we need to get the start of the match
   if a:findstart == 1
-    call go#lsp#Completion(expand('%:p'), line('.'), col('.'), funcref('s:handler', [l:state]))
+    let l:completion = go#lsp#Completion(expand('%:p'), line('.'), col('.'), funcref('s:handler', [l:state]))
+    if l:completion
+      return -3
+    endif
 
     while !l:state.done
       sleep 10m
     endwhile
-
-    let s:completions = l:state.matches
 
     if len(l:state.matches) == 0
       " no matches. cancel and leave completion mode.
@@ -271,7 +273,10 @@ function! go#complete#Complete(findstart, base) abort
       return -3
     endif
 
-    return col('.')
+    let s:completions = l:state.matches
+
+    return l:state.start
+
   else "findstart = 0 when we need to return the list of completions
     return s:completions
   endif

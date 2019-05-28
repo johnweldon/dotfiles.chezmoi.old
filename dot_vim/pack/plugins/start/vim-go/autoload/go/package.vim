@@ -137,17 +137,26 @@ function! go#package#ImportPath() abort
 endfunction
 
 
-" FromPath returns the import path of arg.
+" go#package#FromPath returns the import path of arg. -1 is returned when arg
+" does not specify a package. -2 is returned when arg is a relative path
+" outside of GOPATH and not in a module.
 function! go#package#FromPath(arg) abort
   let l:cd = exists('*haslocaldir') && haslocaldir() ? 'lcd' : 'cd'
   let l:dir = getcwd()
 
-  let l:path = a:arg
+  let l:path = fnamemodify(a:arg, ':p')
   if !isdirectory(l:path)
     let l:path = fnamemodify(l:path, ':h')
   endif
 
   execute l:cd fnameescape(l:path)
+  if glob("*.go") == ""
+    " There's no Go code in this directory. We might be in a module directory
+    " which doesn't have any code at this level.
+    if !empty(s:module())
+      return -1
+    endif
+  endif
   let [l:out, l:err] = go#util#Exec(['go', 'list'])
   execute l:cd fnameescape(l:dir)
   if l:err != 0
@@ -156,10 +165,10 @@ function! go#package#FromPath(arg) abort
 
   let l:importpath = split(l:out, '\n')[0]
 
-  " go list returns '_CURRENTDIRECTORY' if the directory is not inside GOPATH.
-  " Check it and retun an error if that is the case
+  " go list returns '_CURRENTDIRECTORY' if the directory is neither in GOPATH
+  " nor in a module. Check it and retun an error if that is the case
   if l:importpath[0] ==# '_'
-    return -1
+    return -2
   endif
 
   return l:importpath

@@ -14,6 +14,10 @@ function! go#config#VersionWarning() abort
   return get(g:, 'go_version_warning', 1)
 endfunction
 
+function! go#config#NullModuleWarning() abort
+  return get(g:, 'go_null_module_warning', 1)
+endfunction
+
 function! go#config#BuildTags() abort
   return get(g:, 'go_build_tags', '')
 endfunction
@@ -464,6 +468,10 @@ endfunction
 
 function! go#config#EchoGoInfo() abort
   return get(g:, "go_echo_go_info", 1)
+endfunction
+
+function! go#config#CodeCompletionEnabled() abort
+  return get(g:, "go_code_completion_enabled", 1)
 endfunction
 
 " Set the default value. A value of "1" is a shortcut for this, for

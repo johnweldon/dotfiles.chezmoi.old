@@ -101,11 +101,10 @@ function! go#lint#Gometa(bang, autosave, ...) abort
   endif
 endfunction
 
-" Golint calls 'golint' on the current directory. Any warnings are populated in
-" the location list
+" Golint calls 'golint'.
 function! go#lint#Golint(bang, ...) abort
   if a:0 == 0
-    let [l:out, l:err] = go#util#Exec([go#config#GolintBin(), go#package#ImportPath()])
+    let [l:out, l:err] = go#util#ExecInDir([go#config#GolintBin(), '.'])
   else
     let [l:out, l:err] = go#util#Exec([go#config#GolintBin()] + a:000)
   endif
@@ -269,11 +268,13 @@ function! s:golangcilintcmd(bin_path)
   let cmd = [a:bin_path]
   let cmd += ["run"]
   let cmd += ["--print-issued-lines=false"]
+  let cmd += ['--build-tags', go#config#BuildTags()]
   let cmd += ["--disable-all"]
   " do not use the default exclude patterns, because doing so causes golint
   " problems about missing doc strings to be ignored and other things that
   " golint identifies.
   let cmd += ["--exclude-use-default=false"]
+
   return cmd
 endfunction
 

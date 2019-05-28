@@ -6,6 +6,7 @@
 'g:go_autodetect_gopath'	vim-go.txt	/*'g:go_autodetect_gopath'*
 'g:go_bin_path'	vim-go.txt	/*'g:go_bin_path'*
 'g:go_build_tags'	vim-go.txt	/*'g:go_build_tags'*
+'g:go_code_completion_enabled'	vim-go.txt	/*'g:go_code_completion_enabled'*
 'g:go_debug'	vim-go.txt	/*'g:go_debug'*
 'g:go_debug_address'	vim-go.txt	/*'g:go_debug_address'*
 'g:go_debug_log_output'	vim-go.txt	/*'g:go_debug_log_output'*
@@ -64,6 +65,7 @@
 'g:go_metalinter_disabled'	vim-go.txt	/*'g:go_metalinter_disabled'*
 'g:go_metalinter_enabled'	vim-go.txt	/*'g:go_metalinter_enabled'*
 'g:go_mod_fmt_autosave'	vim-go.txt	/*'g:go_mod_fmt_autosave'*
+'g:go_null_module_warning'	vim-go.txt	/*'g:go_null_module_warning'*
 'g:go_play_browser_command'	vim-go.txt	/*'g:go_play_browser_command'*
 'g:go_play_open_browser'	vim-go.txt	/*'g:go_play_open_browser'*
 'g:go_search_bin_path_first'	vim-go.txt	/*'g:go_search_bin_path_first'*
@@ -83,6 +85,7 @@
 'g:go_textobj_include_function_doc'	vim-go.txt	/*'g:go_textobj_include_function_doc'*
 'g:go_textobj_include_variable'	vim-go.txt	/*'g:go_textobj_include_variable'*
 'g:go_updatetime'	vim-go.txt	/*'g:go_updatetime'*
+'g:go_version_warning'	vim-go.txt	/*'g:go_version_warning'*
 (go-alternate-edit)	vim-go.txt	/*(go-alternate-edit)*
 (go-alternate-split)	vim-go.txt	/*(go-alternate-split)*
 (go-alternate-vertical)	vim-go.txt	/*(go-alternate-vertical)*
