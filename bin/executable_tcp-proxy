@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/usr/bin/env bash
 
 if [ $# != 3 ]
 then
@@ -6,7 +6,7 @@ then
     exit 0
 fi
 
-TMP=`mktemp -d -t tcpproxy`
+TMP=$(mktemp -d -t tcpproxy)
 echo "$TMP"
 BACK=$TMP/pipe.back
 SENT=$TMP/pipe.sent
