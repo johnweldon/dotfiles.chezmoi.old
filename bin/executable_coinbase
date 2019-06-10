@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+curr="$(basename "$0")"
+CURR="${curr^^}"
+PRICE=$(curl "https://api.coinbase.com/v2/prices/${CURR}-USD/spot" | jq '.data.amount|tonumber')
+TIME=$(date "+%Y-%m-%d %H:%M:%S")
+
+echo -e "$CURR :: $TIME - $PRICE"
