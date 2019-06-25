@@ -43,3 +43,5 @@
   contributors = shortlog --summary --numbered
   authors = shortlog --summary --numbered
   ignored = !git ls-files -v | grep "^[[:lower:]]"
+
+  bl = blame -w -M
