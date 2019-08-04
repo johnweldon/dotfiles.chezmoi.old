@@ -2,6 +2,7 @@
 users = {{ .chezmoi.username }}
 
 [ui]
+username = {{ .user.name }} <{{ .user.email }}>
 editor = vi
 ignore = ~/.local.hgignore
 merge = kdiff3
