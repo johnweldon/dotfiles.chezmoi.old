@@ -87,7 +87,7 @@ export DEFAULT_DATE_FORMAT="%Y-%m-%d %H:%M:%S"
 
 export GIT_CEILING_DIRECTORIES="{{ .chezmoi.homedir }}/src:{{ .chezmoi.homedir }}/build:{{ .chezmoi.homedir }}/Dropbox:{{ .chezmoi.homedir }}/Downloads"
 
-export MY_SERVERS=localhost
+export MY_SERVERS="${MY_SERVERS:-{{- range $x, $h := .admin.hosts }}{{if $x}} {{end}}{{$h}}{{end -}}}"
 export NOTES_FOLDER="{{ .chezmoi.homedir }}/Documents/notes"
 
 [ -f "{{ .chezmoi.homedir }}/.bash.functions" ] && . "{{ .chezmoi.homedir }}/.bash.functions"
