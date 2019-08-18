@@ -1,3 +1,5 @@
+set-environment -g 'SSH_AUTH_SOCK' ~/.ssh/ssh_auth_sock
+
 set -g default-terminal "screen-256color"
 setw -q -g utf8 on
 
@@ -19,7 +21,7 @@ setw -g window-status-bell-attr none
 
 set -s escape-time 10
 set -sg repeat-time 600
-set -s focus-events on
+#set -s focus-events on
 set -g history-limit 5000
 
 if '[ -f ~/.local.tmux.conf ]' 'source ~/.local.tmux.conf'
