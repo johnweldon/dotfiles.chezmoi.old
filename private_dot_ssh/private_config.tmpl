@@ -4,7 +4,7 @@
 {{ with .ssh.config }}{{ . }}{{ end }}
 
 Host *github.com *bitbucket.org
-    ForwardAgent no
+    ForwardAgent yes
 
 
 ## General
@@ -12,7 +12,7 @@ Host *github.com *bitbucket.org
 Host *
     User {{ .chezmoi.username }}
     Protocol 2
-    ForwardAgent yes
+    ForwardAgent no
     StrictHostKeyChecking no
     ServerAliveCountMax 200
     ServerAliveInterval 10
