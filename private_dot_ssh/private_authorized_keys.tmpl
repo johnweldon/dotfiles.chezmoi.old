@@ -1,5 +1,6 @@
-{{ with (index . "ssh") -}}
-{{ with (index . "authorized") }}{{ . }}{{ end }}
-{{ with (index . "authorized_keys")}}{{ range . }}
-{{ . }}{{end }}{{ end }}
-{{- end }}
+{{- with (index . "ssh") }}
+{{- with (index . "authorized") }}{{ . }}
+{{ end -}}
+{{- with (index . "authorized_keys") }}{{ range . }}{{ . }}
+{{ end }}{{ end }}
+{{- end -}}
