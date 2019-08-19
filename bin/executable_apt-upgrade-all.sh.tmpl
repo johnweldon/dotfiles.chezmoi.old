@@ -1,9 +1,9 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
 
 . ~/.bash.functions
 
-export MY_SERVERS="{{- range $x, $h := .admin.apthosts -}}{{- if $x }} {{ end -}}{{- $h -}}{{ end -}}"
+export MY_SERVERS="${MY_SERVERS:-{{with (index . "admin")}}{{ with (index . "apthosts") }}{{ range $x, $h := . }}{{ if $x }} {{ end }}{{ $h }}{{ end }}{{ end }}{{ end }}}"
 
 do_on_my_servers " \
   sudo apt update; \
@@ -14,4 +14,4 @@ do_on_my_servers " \
     echo -e '\n\n\treboot needed\n\n' || \
     echo -e '\n\tAll Done\n' \
   "
-{{- end -}}
+{{- end }}

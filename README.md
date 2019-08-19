@@ -10,10 +10,6 @@ data:
     time_zone: America/Phoenix
   ssh:
     public: <public key>
-    private: |-
-      -----BEGIN RSA PRIVATE KEY-----
-      <private key>
-      -----END RSA PRIVATE KEY-----
     config: |-
       Host beowulf
           Port 23123
@@ -28,4 +24,12 @@ data:
     - localhost
 ```
 
-You can generate it with the `generate` script.
+~~You can generate it with the `generate` script.~~
+
+Chezmoi now supports (in recent versions) a full initialization from one command:
+
+    chezmoi init https://github.com/user/dotfiles.git --apply
+
+Read more by running `chezmoi help init`
+
+

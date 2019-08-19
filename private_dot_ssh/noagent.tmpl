@@ -1,1 +1,1 @@
-{{ with (index .ssh "allow_agent")}}{{ else }}do not allow ssh-agent{{ end }}
+{{ with (index . "ssh") }}{{ with (index . "allow_agent")}}{{ else }}do not allow ssh-agent{{ end }}{{ end }}
