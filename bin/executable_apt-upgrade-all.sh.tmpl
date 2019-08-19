@@ -3,7 +3,7 @@
 
 . ~/.bash.functions
 
-export MY_SERVERS="${MY_SERVERS:-{{with (index . "admin")}}{{ with (index . "apthosts") }}{{ range $x, $h := . }}{{ if $x }} {{ end }}{{ $h }}{{ end }}{{ end }}{{ end }}}"
+export MY_SERVERS="{{with (index . "admin")}}{{ with (index . "apthosts") }}{{ range $x, $h := . }}{{ if $x }} {{ end }}{{ $h }}{{ end }}{{ end }}{{ end }}"
 
 do_on_my_servers " \
   sudo apt update; \
