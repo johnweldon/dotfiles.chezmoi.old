@@ -73,7 +73,7 @@ if [ ! -f "{{ .chezmoi.homedir }}/.ssh/noagent" ] ; then
   [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" 2>&1 > /dev/null
   if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
     echo "cleanup and restart ssh-agent"
-    [ -f{{ .chezmoi.homedir }}/.ssh/agent.pid ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
     ssh-agent > "{{ .chezmoi.homedir }}/.ssh/agent.pid"
     source "{{ .chezmoi.homedir }}/.ssh/agent.pid"
   fi
