@@ -1,0 +1,9 @@
+# pack-refs with: peeled fully-peeled sorted 
+9ac6460b1eabf42aba723f6becc677be685203ab refs/remotes/origin/master
+32b79d0cb6fad2885f52d7356837b064baf68e6a refs/remotes/origin/sqlserver
+3a1e7fe15b2862f03fd8dd552a97f0f67c95db95 refs/tags/v1.0
+^1dd0e6e0f79e05d0354f680d145f4ac852da15ab
+469e638d1d2aff08284c78ef6ff86c23b02c1a5c refs/tags/v1.1
+^b4aa16698b5259e03f1ea9e13aa96e756b35039c
+c766903217e2672777a8beee02088bcc50377e76 refs/tags/v1.2
+^3f4752e49617f48ce26b317a1c3ef4023b40927a

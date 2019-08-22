@@ -1,0 +1,26 @@
+80ab12c7b645b392feb98723873d77b045a0a7e2		branch 'v2.5.x' of github.com:w0rp/ale
+b7cf673b1aace889d71904f6849f40272ad67374	not-for-merge	branch 'autocmd-qf' of github.com:w0rp/ale
+1bcf3dc65d9408d8c62018c4ae96fb79e1784387	not-for-merge	branch 'bugfix/c-lsp-build-dir-settings' of github.com:w0rp/ale
+ca2026bd13346cb7e1afeecb54dbec3da0bd5151	not-for-merge	branch 'code-actions-support' of github.com:w0rp/ale
+7a6097ac176b05281a22e60b922fca95de8e4494	not-for-merge	branch 'cwd' of github.com:w0rp/ale
+dc3c36ed42e9ab4cbb3564d3a8f93fe913032c3a	not-for-merge	branch 'deoplete-support' of github.com:w0rp/ale
+f82ce99da2aec802b587acaa47a421051da3fd64	not-for-merge	branch 'go-projroot' of github.com:w0rp/ale
+2baccc468a9047aa25338e135b047fe465b8d6fd	not-for-merge	branch 'golangcilint' of github.com:w0rp/ale
+5fc27178f0bd54f66e21f2d5bebb0e1e9fa93ee1	not-for-merge	branch 'goto' of github.com:w0rp/ale
+18eba467107015e5cc68b6394e74427f6d9f872f	not-for-merge	branch 'logging' of github.com:w0rp/ale
+73812c3e41c1c7fcf1705811f35ac4c9ccec003e	not-for-merge	branch 'master' of github.com:w0rp/ale
+62195b7a68a6b92a8cbbb8bc5fad4670408ffa92	not-for-merge	branch 'v1.0.x' of github.com:w0rp/ale
+97b410bbba88b119995c935b519164685537b579	not-for-merge	branch 'v1.1.x' of github.com:w0rp/ale
+84004665d5010ed2a7f56301bece94ac61359fe6	not-for-merge	branch 'v1.2.x' of github.com:w0rp/ale
+76b5c9283da30f90acadda0da3b77534909c88d7	not-for-merge	branch 'v1.3.x' of github.com:w0rp/ale
+cedc3e1a1f26b458a7f62f9758b6b425e711c826	not-for-merge	branch 'v1.4.x' of github.com:w0rp/ale
+a94f7aaa7e34af4084dade820840985f90d9928b	not-for-merge	branch 'v1.5.x' of github.com:w0rp/ale
+5556fcbd1c271001d22b88a9d4533b3d64e0e394	not-for-merge	branch 'v1.6.x' of github.com:w0rp/ale
+c7a9ffcb9ca9c179d30af0dd27d817ec48c58a5a	not-for-merge	branch 'v1.7.x' of github.com:w0rp/ale
+4c3bd8a84f990c362d7a927c2349dd4cc5e6c2d1	not-for-merge	branch 'v1.8.x' of github.com:w0rp/ale
+ae3b13d132c89d0b6a88102eec0cddd03989b759	not-for-merge	branch 'v1.9.x' of github.com:w0rp/ale
+2ee3dcdd62ad8a5e6eee8821e158b606e0516f82	not-for-merge	branch 'v2.0.x' of github.com:w0rp/ale
+c76d8aa0b59f877fbc7d741a18f0c0485b62fb7b	not-for-merge	branch 'v2.1.x' of github.com:w0rp/ale
+0c17ba2a0fa90d219e52fdb64c29cc65fd950e97	not-for-merge	branch 'v2.2.x' of github.com:w0rp/ale
+0c6370f41a2e474fc8468a40e5b9a9312347d743	not-for-merge	branch 'v2.3.x' of github.com:w0rp/ale
+d837169f1d10f0fee605cc17564c68563db94601	not-for-merge	branch 'v2.4.x' of github.com:w0rp/ale
