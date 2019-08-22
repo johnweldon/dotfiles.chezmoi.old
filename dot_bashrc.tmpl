@@ -70,7 +70,7 @@ export LSCOLORS=Gxfxbxdxcxegedabagacad
 {{- end }}
 
 if [ ! -f "{{ .chezmoi.homedir }}/.ssh/noagent" ] ; then
-  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" 2>&1 > /dev/null
+  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" > /dev/null 2>&1 
   if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
     echo "cleanup and restart ssh-agent"
     [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
