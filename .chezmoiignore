@@ -2,4 +2,5 @@ README.md
 generate
 .git/
 dot_git/
+dot_git_exact/
 dot_git*

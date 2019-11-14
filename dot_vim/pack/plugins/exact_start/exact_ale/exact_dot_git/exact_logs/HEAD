@@ -1,6 +1,0 @@
-0000000000000000000000000000000000000000 32c8bd1fa4629d52df27103fcf18d59c5d16b343 John Weldon <johnweldon4@gmail.com> 1553640828 -0700	clone: from gh:w0rp/ale
-32c8bd1fa4629d52df27103fcf18d59c5d16b343 32c8bd1fa4629d52df27103fcf18d59c5d16b343 John Weldon <johnweldon4@gmail.com> 1553641869 -0700	reset: moving to HEAD
-32c8bd1fa4629d52df27103fcf18d59c5d16b343 ce0b14979ea7429f07b6ca496333f72d93a8d013 John Weldon <johnweldon4@gmail.com> 1556048738 -0700	pull: Fast-forward
-ce0b14979ea7429f07b6ca496333f72d93a8d013 02af53b8b0a9a47c4e66e52747d98ee74bbb8118 John Weldon <johnweldon4@gmail.com> 1556048788 -0700	checkout: moving from master to v2.4.0
-02af53b8b0a9a47c4e66e52747d98ee74bbb8118 d837169f1d10f0fee605cc17564c68563db94601 John Weldon <johnweldon4@gmail.com> 1559078023 -0700	checkout: moving from 02af53b8b0a9a47c4e66e52747d98ee74bbb8118 to origin/v2.4.x
-d837169f1d10f0fee605cc17564c68563db94601 80ab12c7b645b392feb98723873d77b045a0a7e2 John Weldon <johnweldon4@gmail.com> 1566516623 -0700	checkout: moving from d837169f1d10f0fee605cc17564c68563db94601 to v2.5.x

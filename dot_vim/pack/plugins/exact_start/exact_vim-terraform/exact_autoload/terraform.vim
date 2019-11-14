@@ -1,3 +1,6 @@
+" Ensure no conflict with arguments from the environment
+let $TF_CLI_ARGS_fmt=''
+
 function! terraform#fmt()
   if !filereadable(expand('%:p'))
     return
@@ -5,7 +8,7 @@ function! terraform#fmt()
   let l:curw = winsaveview()
   " Make a fake change so that the undo point is right.
   normal! ix
-  normal! x
+  normal! "_x
   silent execute '%!terraform fmt -no-color -'
   if v:shell_error != 0
     let output = getline(1, '$')
@@ -13,34 +16,6 @@ function! terraform#fmt()
     echo join(output, "\n")
   endif
   call winrestview(l:curw)
-endfunction
-
-function! terraform#folds()
-  let thisline = getline(v:lnum)
-  if match(thisline, '^resource') >= 0
-    return '>1'
-  elseif match(thisline, '^provider') >= 0
-    return '>1'
-  elseif match(thisline, '^module') >= 0
-    return '>1'
-  elseif match(thisline, '^variable') >= 0
-    return '>1'
-  elseif match(thisline, '^output') >= 0
-    return '>1'
-  elseif match(thisline, '^data') >= 0
-    return '>1'
-  elseif match(thisline, '^terraform') >= 0
-    return '>1'
-  elseif match(thisline, '^locals') >= 0
-    return '>1'
-  else
-    return '='
-  endif
-endfunction
-
-function! terraform#foldText()
-  let foldsize = (v:foldend-v:foldstart)
-  return getline(v:foldstart).' ('.foldsize.' lines)'
 endfunction
 
 function! terraform#align()
@@ -54,31 +29,32 @@ function! terraform#align()
   endif
 endfunction
 
-function! terraform#commands(A, L, P)
-  return [
-  \ 'apply',
-  \ 'console',
-  \ 'destroy',
-  \ 'env',
-  \ 'fmt',
-  \ 'get',
-  \ 'graph',
-  \ 'import',
-  \ 'init',
-  \ 'output',
-  \ 'plan',
-  \ 'providers',
-  \ 'refresh',
-  \ 'show',
-  \ 'taint',
-  \ 'untaint',
-  \ 'validate',
-  \ 'version',
-  \ 'workspace',
-  \ '0.12upgrade',
-  \ 'debug',
-  \ 'force-unlock',
-  \ 'push',
-  \ 'state'
+function! terraform#commands(ArgLead, CmdLine, CursorPos)
+  let l:commands = [
+    \ 'apply',
+    \ 'console',
+    \ 'destroy',
+    \ 'env',
+    \ 'fmt',
+    \ 'get',
+    \ 'graph',
+    \ 'import',
+    \ 'init',
+    \ 'output',
+    \ 'plan',
+    \ 'providers',
+    \ 'refresh',
+    \ 'show',
+    \ 'taint',
+    \ 'untaint',
+    \ 'validate',
+    \ 'version',
+    \ 'workspace',
+    \ '0.12upgrade',
+    \ 'debug',
+    \ 'force-unlock',
+    \ 'push',
+    \ 'state'
   \ ]
+  return join(l:commands, "\n")
 endfunction

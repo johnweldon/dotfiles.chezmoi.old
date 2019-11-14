@@ -1,0 +1,3 @@
+terraform	terraform.txt	/*terraform*
+terraform-:terraform	terraform.txt	/*terraform-:terraform*
+terraform.txt	terraform.txt	/*terraform.txt*
