@@ -17,7 +17,7 @@
 	encoding = utf-8
 
 [log]
-	date = iso
+	date = relative
 	decorate = true
 
 [apply]
@@ -68,8 +68,7 @@
 	untracked = cyan
 
 [format]
-	pretty = %C(bold red)%h%Creset %C(white)%>(8,trunc)%ar%Creset %Cgreen%<(12,trunc)%aN%Creset %C(bold normal)%<(30)%s%Creset %C(auto)%d%Creset 
-	##>
+	pretty = %C(bold red)%h%Creset %C(white)%ad%Creset %Cgreen%aN%Creset %C(bold normal)%s%Creset %C(auto)%d%Creset
 
 [include]
 	path = .git.aliases
