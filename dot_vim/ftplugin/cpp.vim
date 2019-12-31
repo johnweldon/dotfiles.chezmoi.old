@@ -13,7 +13,7 @@ nmap <SID>Format :call <SID>Format()<CR>
 function! s:Format()
 	let pos = getpos('.')
 	silent update
-	silent %!astyle --project
+	silent %!astyle
 	call setpos('.', pos)
 endfunction
 
