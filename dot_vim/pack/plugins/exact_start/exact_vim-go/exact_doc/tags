@@ -1,3 +1,4 @@
+'b:go_fmt_options'	vim-go.txt	/*'b:go_fmt_options'*
 'g:go_addtags_transform'	vim-go.txt	/*'g:go_addtags_transform'*
 'g:go_alternate_mode'	vim-go.txt	/*'g:go_alternate_mode'*
 'g:go_asmfmt_autosave'	vim-go.txt	/*'g:go_asmfmt_autosave'*
@@ -16,6 +17,7 @@
 'g:go_def_mapping_enabled'	vim-go.txt	/*'g:go_def_mapping_enabled'*
 'g:go_def_mode'	vim-go.txt	/*'g:go_def_mode'*
 'g:go_def_reuse_buffer'	vim-go.txt	/*'g:go_def_reuse_buffer'*
+'g:go_diagnostics_enabled'	vim-go.txt	/*'g:go_diagnostics_enabled'*
 'g:go_doc_height'	vim-go.txt	/*'g:go_doc_height'*
 'g:go_doc_keywordprg_enabled'	vim-go.txt	/*'g:go_doc_keywordprg_enabled'*
 'g:go_doc_popup_window'	vim-go.txt	/*'g:go_doc_popup_window'*
@@ -35,7 +37,9 @@
 'g:go_gocode_unimported_packages'	vim-go.txt	/*'g:go_gocode_unimported_packages'*
 'g:go_gopls_complete_unimported'	vim-go.txt	/*'g:go_gopls_complete_unimported'*
 'g:go_gopls_deep_completion'	vim-go.txt	/*'g:go_gopls_deep_completion'*
+'g:go_gopls_enabled'	vim-go.txt	/*'g:go_gopls_enabled'*
 'g:go_gopls_fuzzy_matching'	vim-go.txt	/*'g:go_gopls_fuzzy_matching'*
+'g:go_gopls_staticcheck'	vim-go.txt	/*'g:go_gopls_staticcheck'*
 'g:go_gopls_use_placeholders'	vim-go.txt	/*'g:go_gopls_use_placeholders'*
 'g:go_gorename_prefill'	vim-go.txt	/*'g:go_gorename_prefill'*
 'g:go_guru_scope'	vim-go.txt	/*'g:go_guru_scope'*
@@ -69,12 +73,12 @@
 'g:go_metalinter_autosave_enabled'	vim-go.txt	/*'g:go_metalinter_autosave_enabled'*
 'g:go_metalinter_command'	vim-go.txt	/*'g:go_metalinter_command'*
 'g:go_metalinter_deadline'	vim-go.txt	/*'g:go_metalinter_deadline'*
-'g:go_metalinter_disabled'	vim-go.txt	/*'g:go_metalinter_disabled'*
 'g:go_metalinter_enabled'	vim-go.txt	/*'g:go_metalinter_enabled'*
 'g:go_mod_fmt_autosave'	vim-go.txt	/*'g:go_mod_fmt_autosave'*
 'g:go_play_browser_command'	vim-go.txt	/*'g:go_play_browser_command'*
 'g:go_play_open_browser'	vim-go.txt	/*'g:go_play_open_browser'*
 'g:go_referrers_mode'	vim-go.txt	/*'g:go_referrers_mode'*
+'g:go_rename_command'	vim-go.txt	/*'g:go_rename_command'*
 'g:go_search_bin_path_first'	vim-go.txt	/*'g:go_search_bin_path_first'*
 'g:go_snippet_engine'	vim-go.txt	/*'g:go_snippet_engine'*
 'g:go_statusline_duration'	vim-go.txt	/*'g:go_statusline_duration'*
@@ -185,6 +189,7 @@
 :GoDefType	vim-go.txt	/*:GoDefType*
 :GoDeps	vim-go.txt	/*:GoDeps*
 :GoDescribe	vim-go.txt	/*:GoDescribe*
+:GoDiagnostics	vim-go.txt	/*:GoDiagnostics*
 :GoDoc	vim-go.txt	/*:GoDoc*
 :GoDocBrowser	vim-go.txt	/*:GoDocBrowser*
 :GoDrop	vim-go.txt	/*:GoDrop*
