@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo nmap -sU -p67 --script broadcast-dhcp-discover
