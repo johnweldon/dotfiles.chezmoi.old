@@ -1,1 +1,12 @@
 set completion-ignore-case On
+
+# mappings to have up and down arrow searching through history:
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# mappings to have left and right arrow go left and right:
+"\e[C": forward-char
+"\e[D": backward-char
+
+# mapping to have [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+"\t": menu-complete
+"\e[Z": menu-complete-backward
