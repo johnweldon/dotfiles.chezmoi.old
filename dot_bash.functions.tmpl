@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+function start_ssh_agent() {
+  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" > /dev/null 2>&1 
+  if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
+    echo "cleanup and restart ssh-agent"
+    [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    ssh-agent > "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    source "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+  fi
+}
+
 function do_each_repo() {
   for r in $(find . -type d -name .git -exec dirname {} \;); do
     echo -e "Entering $r\n--------\n"

@@ -69,14 +69,10 @@ export CLICOLOR=TRUE
 export LSCOLORS=Gxfxbxdxcxegedabagacad
 {{- end }}
 
+[ -f "{{ .chezmoi.homedir }}/.bash.functions" ] && . "{{ .chezmoi.homedir }}/.bash.functions"
+
 if [ ! -f "{{ .chezmoi.homedir }}/.ssh/noagent" ] ; then
-  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" > /dev/null 2>&1 
-  if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
-    echo "cleanup and restart ssh-agent"
-    [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
-    ssh-agent > "{{ .chezmoi.homedir }}/.ssh/agent.pid"
-    source "{{ .chezmoi.homedir }}/.ssh/agent.pid"
-  fi
+  start_ssh_agent
 fi
 
 
@@ -89,8 +85,6 @@ export GIT_CEILING_DIRECTORIES="{{ .chezmoi.homedir }}/src:{{ .chezmoi.homedir }
 
 export MY_SERVERS="${MY_SERVERS:-{{with (index . "admin")}}{{ with (index . "hosts") }}{{ range $x, $h := . }}{{ if $x }} {{ end }}{{ $h }}{{ end }}{{ end }}{{ end }}}"
 export NOTES_FOLDER="{{ .chezmoi.homedir }}/Documents/notes"
-
-[ -f "{{ .chezmoi.homedir }}/.bash.functions" ] && . "{{ .chezmoi.homedir }}/.bash.functions"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
