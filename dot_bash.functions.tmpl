@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
+function dot_env() {
+  set -a
+  [ -f ".env" ] && source ".env"
+  set +a
+}
+
 function start_ssh_agent() {
-  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" > /dev/null 2>&1 
-  if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p $SSH_AGENT_PID -o comm=)" != "ssh-agent" ] ; then
+  [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && source "{{ .chezmoi.homedir }}/.ssh/agent.pid" >/dev/null 2>&1
+  if [ -z "${SSH_AGENT_PID}" ] || [ "$(ps -p "${SSH_AGENT_PID}" -o comm=)" != "ssh-agent" ]; then
     echo "cleanup and restart ssh-agent"
     [ -f "{{ .chezmoi.homedir }}/.ssh/agent.pid" ] && rm -f "{{ .chezmoi.homedir }}/.ssh/agent.pid"
-    ssh-agent > "{{ .chezmoi.homedir }}/.ssh/agent.pid"
+    ssh-agent >"{{ .chezmoi.homedir }}/.ssh/agent.pid"
     source "{{ .chezmoi.homedir }}/.ssh/agent.pid"
   fi
 }
@@ -13,27 +19,35 @@ function start_ssh_agent() {
 function do_each_repo() {
   for r in $(find . -type d -name .git -exec dirname {} \;); do
     echo -e "Entering $r\n--------\n"
-    (cd $r; git status;  git remote -v)
-    echo -e "\nAbout to: $@"
-    read -p "Proceed? " -n 1 selection
+    (
+      cd $r
+      git status
+      git remote -v
+    )
+    echo -e "\nAbout to: $*"
+    read -p "Proceed? " -r -n 1 selection
     echo
     case "$selection" in
-      q|Q|x|X ) return -1 ;;
-      y|Y ) (cd $r; eval "$@") ;;
-        * ) echo -e "\nskipping" ;;
+    q | Q | x | X) return 255 ;;
+    y | Y) (
+      cd $r
+      eval "$@"
+    ) ;;
+    *) echo -e "\nskipping" ;;
     esac
     echo -e "\n--------"
   done
 }
 
 function do_on_my_servers() {
-  for h in ${MY_SERVERS:-localhost}; do echo -e "\n\n\tConnecting to $h\n\t----------\n"
-    ssh -t $h "$@"
+  for h in ${MY_SERVERS:-localhost}; do
+    echo -e "\n\n\tConnecting to $h\n\t----------\n"
+    ssh -t "$h" "$@"
   done
 }
 
 function random_string() {
-  LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | fold -w ${1:-32} | head -n 1
+  LC_ALL=C tr -dc "[:alnum:]" </dev/urandom | fold -w "${1:-32}" | head -n 1
   #>
 }
 
@@ -41,16 +55,16 @@ function gi() {
   first=$1
   [ "$1" != "" ] && [ "${1:0:1}" == 't' ] && first=${1:1}
   shift
-  eval "git $first $@"
+  eval "git $first $*"
 }
 
 function pusdh() {
-  eval "pushd $@"
+  eval "pushd $*"
 }
 
-function didfile {
-  [[ -z "$1" ]] && \
-    local WORKING_DATE="$(date +%Y-%m-%d)" || \
+function didfile() {
+  [[ -z "$1" ]] &&
+    local WORKING_DATE="$(date +%Y-%m-%d)" ||
     local WORKING_DATE="$(date -v${1} +%Y-%m-%d)"
 
   local DID_FOLDER="${NOTES_FOLDER}"
@@ -58,22 +72,22 @@ function didfile {
   echo "${DID_FILE:-${DID_FOLDER:-~}/${WORKING_DATE}.did}"
 }
 
-function did {
+function did() {
   DID_FOLDER="${NOTES_FOLDER}"
   [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
   DID_MESSAGE="$*" vim "$(didfile)"
   today
 }
 
-function today {
-  cat $(didfile)
+function today() {
+  cat "$(didfile)"
 }
 
-function yesterday {
-  cat $(didfile "-1d")
+function yesterday() {
+  cat "$(didfile "-1d")"
 }
 
-function setprompt {
+function setprompt() {
   local escon="\[\033["
   local escoff="\]"
 
