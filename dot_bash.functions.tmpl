@@ -2,6 +2,7 @@
 
 function dot_env() {
   set -a
+  # shellcheck disable=SC1091
   [ -f ".env" ] && source ".env"
   set +a
 }
@@ -16,25 +17,24 @@ function start_ssh_agent() {
   fi
 }
 
+function list_repos() {
+  find . -type d -name '.git' -execdir pwd \;
+}
+
 function do_each_repo() {
-  for r in $(find . -type d -name .git -exec dirname {} \;); do
-    echo -e "Entering $r\n--------\n"
+  # shellcheck disable=SC2162
+  list_repos | while read repo_dir; do
+    echo -e "Entering $repo_dir\n--------\n"
     (
-      cd $r
+      cd "$repo_dir" || return 1
       git status
       git remote -v
     )
     echo -e "\nAbout to: $*"
-    read -p "Proceed? " -r -n 1 selection
+    sleep 2
     echo
-    case "$selection" in
-    q | Q | x | X) return 255 ;;
-    y | Y) (
-      cd $r
-      eval "$@"
-    ) ;;
-    *) echo -e "\nskipping" ;;
-    esac
+    cd "$repo_dir" || return 1
+    eval "$@"
     echo -e "\n--------"
   done
 }
@@ -63,11 +63,12 @@ function pusdh() {
 }
 
 function didfile() {
-  [[ -z "$1" ]] &&
-    local WORKING_DATE="$(date +%Y-%m-%d)" ||
-    local WORKING_DATE="$(date -v${1} +%Y-%m-%d)"
+  local WORKING_DATE
+  WORKING_DATE="$(date +%Y-%m-%d)"
+  [ -z "$1" ] || WORKING_DATE=$(date -v"${1}" +%Y-%m-%d)
 
-  local DID_FOLDER="${NOTES_FOLDER}"
+  local DID_FOLDER
+  DID_FOLDER="${NOTES_FOLDER}"
   [ -z "${DID_FOLDER}" ] || [ -d "${DID_FOLDER}" ] || mkdir -p "${DID_FOLDER}"
   echo "${DID_FILE:-${DID_FOLDER:-~}/${WORKING_DATE}.did}"
 }
@@ -87,6 +88,7 @@ function yesterday() {
   cat "$(didfile "-1d")"
 }
 
+# shellcheck disable=SC2034,SC2016
 function setprompt() {
   local escon="\[\033["
   local escoff="\]"
