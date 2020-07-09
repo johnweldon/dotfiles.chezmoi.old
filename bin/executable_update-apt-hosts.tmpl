@@ -1,0 +1,20 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+# shellcheck source=../.bash.functions
+. ~/.bash.functions
+
+export MY_SERVERS="{{with (index . "admin")}}{{ with (index . "apthosts") }}{{ range $x, $h := . }}{{ if $x }} {{ end }}{{ $h }}{{ end }}{{ end }}{{ end }}"
+
+# shellcheck disable=SC2089
+export EACH_COMMAND="sudo -n sh -c '
+  apt -qq update &&
+  apt -qq dist-upgrade &&
+  apt -qq autoremove --purge &&
+  apt -qq autoclean' &&
+[ -f \"/run/reboot-required\" ] && echo -e \"\n\n\tREBOOT needed\n\n\"
+"
+
+# shellcheck disable=SC2090
+do_on_my_servers "${EACH_COMMAND}"
+{{- end }}
