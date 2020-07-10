@@ -8,10 +8,10 @@ export MY_SERVERS="{{with (index . "admin")}}{{ with (index . "apthosts") }}{{ r
 
 # shellcheck disable=SC2089
 export EACH_COMMAND="sudo -n sh -c '
-  apt -qq update &&
-  apt -qq dist-upgrade &&
-  apt -qq autoremove --purge &&
-  apt -qq autoclean' &&
+  apt -qqy update &&
+  apt -qqy dist-upgrade &&
+  apt -qqy autoremove --purge &&
+  apt -qqy autoclean' &&
 [ -f \"/run/reboot-required\" ] && echo -e \"\n\n\tREBOOT needed\n\n\"
 "
 
