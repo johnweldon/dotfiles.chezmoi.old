@@ -48,4 +48,3 @@ EOF
 FOR_EACH_FORMAT="%(committerdate:relative)%09%(refname:short)%09%(subject)%09%(objectname:short)%09%(HEAD)%09%(objecttype)%01"
 
 git for-each-ref --sort=committerdate --format=$FOR_EACH_FORMAT refs/heads refs/remotes | tr -d '\r\n' | awk "$AWK"
-

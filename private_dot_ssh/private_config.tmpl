@@ -1,11 +1,10 @@
-#ControlMaster auto
-#ControlPath ~/.ssh/control:%h:%p:%r
+# ControlMaster auto
+# ControlPath ~/.ssh/control:%h:%p:%r
 
 {{ with (index . "ssh") -}}{{ with (index . "config")}}{{ . }}{{end}}{{ end}}
 
 Host *github.com *bitbucket.org
     ForwardAgent yes
-
 
 ## General
 
@@ -16,7 +15,6 @@ Host *
     ServerAliveCountMax 200
     ServerAliveInterval 10
     TCPKeepAlive yes
-
 
 ## Document sample settings
 #
