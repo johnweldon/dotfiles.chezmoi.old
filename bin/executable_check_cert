@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HOST="${HOST:-johnweldon.com}"
-PORT="${PORT:-443}"
+HOST="${1:-johnweldon.com}"
+PORT="${2:-443}"
 
-openssl s_client -connect ${HOST}:${PORT} -showcerts -servername ${HOST} </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -email -dates
+openssl s_client -connect "${HOST}:${PORT}" -showcerts -servername "${HOST}" </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -email -dates

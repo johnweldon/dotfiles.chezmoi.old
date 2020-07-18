@@ -2,4 +2,4 @@
 
 INTERFACE=${1:-eth0}
 
-sudo tcpdump -i ${INTERFACE} -n -lvvv -s 0 'port 53'
+sudo tcpdump -i "${INTERFACE}" -n -lvvv -s 0 'port 53'
