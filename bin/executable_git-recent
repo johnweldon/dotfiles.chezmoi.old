@@ -10,7 +10,7 @@ BEGIN { RS = "\1" ; FS = "\t" }
            head=\$5;
            type=\$6;
 
-            len=split(refname, ref, "/");
+             st=index(refname, "/")
             ln2=split(subj, subja, "\n");
         subject=substr(subja[1],1, 72);
 
@@ -37,10 +37,10 @@ BEGIN { RS = "\1" ; FS = "\t" }
 
          fmtstr=lightred "%15s" cyan "%s" lightgreen "%-25s" lightcyan " %15s" yellow " %s" reset " %s\n";
 
-        if ( len < 2 ) {
-            printf fmtstr, "----", head, ref[1], date, sha, subject;
+        if ( st ) {
+            printf fmtstr, substr(refname, 0, st-1), head, substr(refname, st+1), date, sha, subject;
         } else {
-            printf fmtstr, ref[1], head, ref[2], date, sha, subject;
+            printf fmtstr, " -- ",                   head, refname,               date, sha, subject;
         }
 }
 EOF
