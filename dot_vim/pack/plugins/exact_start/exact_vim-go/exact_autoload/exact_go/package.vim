@@ -18,7 +18,7 @@ if len(s:goos) == 0
   elseif has('win32') || has('win64')
     let s:goos = 'windows'
   elseif has('macunix')
-    let s:goos = '{{ .chezmoi.os }}'
+    let s:goos = 'darwin'
   else
     let s:goos = '*'
   endif
@@ -59,13 +59,13 @@ function! s:paths() abort
 endfunction
 
 function! s:module() abort
-  let [l:out, l:err] = go#util#ExecInDir(['go', 'list', '-m', '-f', '{{ "{{" }}.Dir{{ "}}" }}'])
+  let [l:out, l:err] = go#util#ExecInDir(['go', 'list', '-m', '-f', '{{.Dir}}'])
   if l:err != 0
     return {}
   endif
   let l:dir = split(l:out, '\n')[0]
 
-  let [l:out, l:err] = go#util#ExecInDir(['go', 'list', '-m', '-f', '{{ "{{" }}.Path{{ "}}" }}'])
+  let [l:out, l:err] = go#util#ExecInDir(['go', 'list', '-m', '-f', '{{.Path}}'])
   if l:err != 0
     return {}
   endif
@@ -78,7 +78,7 @@ function! s:vendordirs() abort
   let l:vendorsuffix = go#util#PathSep() . 'vendor'
   let l:module = s:module()
   if empty(l:module)
-    let [l:root, l:err] = go#util#ExecInDir(['go', 'list', '-f', '{{ "{{" }}.Root{{ "}}" }}'])
+    let [l:root, l:err] = go#util#ExecInDir(['go', 'list', '-f', '{{.Root}}'])
     if l:err != 0
       return []
     endif
@@ -88,7 +88,7 @@ function! s:vendordirs() abort
 
     let l:root = split(l:root, '\n')[0] . go#util#PathSep() . 'src'
 
-    let [l:dir, l:err] = go#util#ExecInDir(['go', 'list', '-f', '{{ "{{" }}.Dir{{ "}}" }}'])
+    let [l:dir, l:err] = go#util#ExecInDir(['go', 'list', '-f', '{{.Dir}}'])
     if l:err != 0
       return []
     endif
@@ -232,10 +232,17 @@ function! go#package#Complete(ArgLead, CmdLine, CursorPos) abort
 
   let vendordirs = s:vendordirs()
 
+  let l:modcache = go#util#env('gomodcache')
+
   let ret = {}
   for dir in dirs
     " this may expand to multiple lines
     let root = split(expand(dir . '/pkg/' . s:goos . '_' . s:goarch), "\n")
+    if l:modcache != ''
+      let root = add(root, l:modcache)
+    else
+      let root = add(root, expand(dir . '/pkg/mod'))
+    endif
     let root = add(root, expand(dir . '/src'), )
     let root = extend(root, vendordirs)
     let root = add(root, module)
@@ -260,9 +267,8 @@ function! go#package#Complete(ArgLead, CmdLine, CursorPos) abort
             let glob = module.dir
           endif
         elseif stridx(module.path, a:ArgLead) == 0 && stridx(module.path, '/', len(a:ArgLead)) < 0
-          " use the module directory when a:ArgLead is contained in
-          " module.path and module.path does not have any path segments after
-          " a:ArgLead.
+          " use the module directory when module.path begins wih a:ArgLead and
+          " module.path does not have any path segments after a:ArgLead.
           let glob = module.dir
         else
           continue
@@ -276,6 +282,11 @@ function! go#package#Complete(ArgLead, CmdLine, CursorPos) abort
           " directories manually?
           if fnamemodify(candidate, ':t') == 'vendor'
             continue
+          endif
+          " if path contains version info, strip it out
+          let vidx = strridx(candidate, '@')
+          if vidx >= 0
+            let candidate = strpart(candidate, 0, vidx)
           endif
           let candidate .= '/'
         elseif candidate !~ '\.a$'

@@ -208,7 +208,7 @@ function! s:numericHighlightGroupInMultidimensionalSliceElement(testname, value)
   let l:dir = gotest#write_file(printf('numeric/slice-multidimensional-element/%s.go', a:testname), [
         \ 'package numeric',
         \ '',
-        \ printf("v := [][]int{{ "{{" }}\x1f%s},{%s{{ "}}" }}", a:value, a:value),
+        \ printf("v := [][]int{{\x1f%s},{%s}}", a:value, a:value),
         \ ])
 
   try
