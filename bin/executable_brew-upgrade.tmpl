@@ -3,7 +3,7 @@
 
 set -e
 
-for subcmd in update upgrade cleanup "cask outdated"; do 
+for subcmd in update upgrade cleanup "outdated --cask"; do
   echo -e "\033[1;33mbrew ${subcmd}\033[0;39m"
   brew ${subcmd}
 done
