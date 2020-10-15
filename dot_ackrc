@@ -1,2 +1,3 @@
 --ignore-dir=vendor
 --ignore-dir=venv
+--ignore-dir=.idea
