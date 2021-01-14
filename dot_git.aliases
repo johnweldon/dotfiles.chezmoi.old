@@ -11,7 +11,7 @@
   lsf = "!f() { git diff-tree --no-commit-id --name-only -r ${1:-HEAD}; }; f"
   kdf = "!f() { git diff --name-only \"$(git merge-base HEAD ${1:-master})\"; }; f"
 
-  f = "!f() { git fetch --all --tags; git submodule foreach git fetch --all --tags; }; f"
+  f = "!f() { git fetch --all --tags --prune; }; f"
 
   b = branch -vva
   amend = commit --amend --reuse-message=HEAD
