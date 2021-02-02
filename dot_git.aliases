@@ -6,7 +6,7 @@
   d = "!git diff-index --quiet HEAD -- ; git diff --patch-with-stat"
   dw = "!git diff-index --quiet HEAD -- ; git diff --word-diff=color --patch-with-stat"
   di = "!d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD --; d"
-  lsc = diff --cached --name-only --diff-filter=ARM --relative
+  lsc = diff --cached --name-only --diff-filter=ARMTC --relative
   lsu = diff --name-only --diff-filter=U --relative
   lsf = "!f() { git diff-tree --no-commit-id --name-only -r ${1:-HEAD}; }; f"
   kdf = "!f() { git diff --name-only \"$(git merge-base HEAD ${1:-master})\"; }; f"
