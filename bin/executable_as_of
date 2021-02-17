@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DTSTR=${1:-$(date)}
+shift
+echo "$@"
+echo "As of: ${DTSTR}"
+
+GIT_AUTHOR_DATE="${DTSTR}"
+GIT_COMMITTER_DATE="${DTSTR}"
+
+export GIT_AUTHOR_DATE GIT_COMMITTER_DATE
+
+eval "$@"
