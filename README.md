@@ -1,5 +1,5 @@
 # Archived / Deprecated
-Using https://github.com/jw4/dotfiles.chezmoi now.
+Using https://github.com/johnweldon/dotfiles now.
 
 
 
